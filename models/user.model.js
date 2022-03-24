@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlenght: 6,
         maxlenght: 20
+    },
+    slug: {
+        type: String,
+        required: true
     }
 })
 
