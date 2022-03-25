@@ -1,17 +1,22 @@
 const User = require('../models/user.model');
+const {v4: uuidv4} = require('uuid');
+//import getDate....
 
 
 module.exports.createUser = async (request, response) => {
     const { lastname, firstname, email, password } = request.body;
+    const slug = uuidv4();
     const user = await User.create({
         lastname,
         firstname,
         email,
-        password
+        password,
+        slug
     });
     response.status(201).json({
         message: "User created successfully",
-        user
+        user,
+        //date
     })
 }
 
@@ -19,7 +24,8 @@ module.exports.getAllUsers = async (request, response) => {
     const users = await User.find();
     response.status(200).json({
         message: "Users fetched successfully",
-        users
+        users,
+        //date...
     })
 }
 
@@ -28,7 +34,8 @@ module.exports.getUserBySLug = async (request, response) => {
     const user = await User.findOne({ slug: slug })
     response.status(200).json({
         message: 'User fetched by slug successfully',
-        user
+        user,
+        //...date.
     })
 }
 
