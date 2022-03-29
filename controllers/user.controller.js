@@ -1,13 +1,15 @@
 const User = require('../models/user.model');
-
+const {v4: uuidv4} = require('uuid');
 
 module.exports.createUser = async (request, response) => {
     const { lastname, firstname, email, password } = request.body;
+    const slug = uuidv4();
     const user = await User.create({
         lastname,
         firstname,
         email,
-        password
+        password,
+        slug
     });
     response.status(201).json({
         message: "User created successfully",
@@ -56,7 +58,7 @@ module.exports.getUserLastname = async (request, response) => {
     const { lastname } = request.params;
     const user = await User.findOne({ lastname: lastname });
     response.status(200).json({
-        message: "User fetch by firstname",
+        message: "User fetch by lastname",
         user
     })
 }

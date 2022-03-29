@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
+        unique: true,
         validate: {
             validator: isEmail,
             message: '{VALUE} n\'est pas un email valide!'
@@ -30,10 +31,11 @@ const userSchema = new mongoose.Schema({
     },
     slug: {
         type: String,
-        required: true
+        
     }
 })
 
+
+
 //On exporte le module pour le rendre disponible dans notre application.
 module.exports = mongoose.model('User', userSchema);
-
